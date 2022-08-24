@@ -1,2 +1,3 @@
 # test-yao
- 基于'YAO'进行的一些测试，用于熟悉'YAO'
+
+ 基于 [*Yao*](https://github.com/YaoApp/yao) 进行的一些练习
