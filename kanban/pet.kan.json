@@ -1,0 +1,73 @@
+{
+  "label": "宠物统计",
+  "version": "1.0.0",
+  "description": "宠物统计",
+  "nodes": [
+    {
+      "name": "类型汇总",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(id) as 数量",
+          "kind as 类型"
+        ],
+        "groups": "类型",
+        "from": "$pet"
+      }
+    }
+  ],
+  "output": {
+    "data": {
+      "宠物类型分布": "{{$res.类型汇总}}"
+    }
+  },
+  "page": {
+    "primary": "kind",
+    "layout": {
+      "filters": [],
+      "charts": [
+        {
+          "name": "宠物类型分布",
+          "width": 24,
+          "type": "bar",
+          "props": {
+            "height": 240,
+            "x_key": "类型",
+            "axisLabel": {
+              "interval": 0,
+              "rotate": 45,
+              "textStyle": {
+                "fontSize": 10
+              }
+            },
+            "tooltip": {
+              "textStyle": {
+                "color": "#a2a5b9",
+                "fontSize": 12
+              },
+              "backgroundColor": "#232326",
+              "borderRadius": 6
+            },
+            "series": [
+              {
+                "name": "数量",
+                "type": "bar",
+                "colorBy": "data",
+                "splitLine": {
+                  "show": false
+                },
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "axisLabel": {
+                  "show": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

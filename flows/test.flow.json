@@ -1,0 +1,34 @@
+{
+  "label": "添加测试数据",
+  "version": "1.0.1",
+  "description": "添加测试数据",
+  "nodes": [
+    {
+      "name": "csphere",
+      "process": "plugins.ci.create",
+      "args": [
+        "abc",
+        "123",
+        "456"
+      ]
+    },
+    {
+      "name": "insert",
+      "process": "models.pet.Insert",
+      "args": [
+        ["sn", "name", "kind","desc"],
+        [
+          ["{{$in.0}}", "{{$in.1}}", "{{$in.2}}", "{{$in.3}}"]
+        ]
+      ]
+    },
+    {
+      "name": "打印数据",
+      "process": "xiang.sys.Print",
+      "args": ["{{$res.csphere}}", "{{$res.insert}}"]
+    }
+  ],
+  "output": {
+    "id": "{{$res.csphere.id}}"
+  }
+}

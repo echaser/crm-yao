@@ -1,0 +1,43 @@
+{
+  "label": "查询最新数据",
+  "version": "1.0.0",
+  "description": "查询系统最新数据",
+  "nodes": [
+    {
+      "name": "宠物",
+      "process": "models.pet.Get",
+      "args": [
+        {
+          "select": ["id", "name", "kind", "created_at"],
+          "wheres": [{ "column": "kind", "value": "{{$in.0}}" }],
+          "orders": [{ "column": "created_at", "option": "desc" }],
+          "limit": 10
+        }
+      ]
+    },
+    {
+      "name": "用户",
+      "process": "models.xiang.user.Get",
+      "args": [
+        {
+          "select": ["id", "name", "created_at"],
+          "wheres": [{ "column": "status", "value": "enabled" }],
+          "orders": [{ "column": "created_at", "option": "desc" }],
+          "limit": 1
+        }
+      ],
+      "outs": ["{{$out.0.id}}", "{{$out.0.name}}", "{{$out.0.created_at}}"]
+    },
+    {
+      "name": "打印数据",
+      "process": "xiang.sys.Print",
+      "args": ["{{$res.宠物}}", "{{$res.用户}}"]
+    }
+  ],
+  "output": {
+    "节点返回值": "{{$res}}",
+    "参数表": "{{$in}}",
+    "宠物列表": "{{$res.宠物}}",
+    "用户": "{{$res.用户}}"
+  }
+}
