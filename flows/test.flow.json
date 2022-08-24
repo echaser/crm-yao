@@ -25,7 +25,7 @@
     {
       "name": "打印数据",
       "process": "xiang.sys.Print",
-      "args": ["{{$res.csphere}}", "{{$res.insert}}"]
+      "args": ["{{$res.csphere}}"]
     }
   ],
   "output": {
